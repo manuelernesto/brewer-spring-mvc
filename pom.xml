@@ -23,6 +23,8 @@
         <spring-framework.version>4.3.0.RELEASE</spring-framework.version>
         <!-- Servlet API -->
         <servlet.version>3.1.0</servlet.version>
+        <!-- Thymeleaf -->
+        <thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
 
     </properties>
 
@@ -45,12 +47,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- Servlet API -->
@@ -59,6 +55,21 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+            <scope>compile</scope>
         </dependency>
 
 
