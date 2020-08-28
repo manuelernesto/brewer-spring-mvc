@@ -14,7 +14,7 @@ public class Cerveja {
     private String nome;
 
     @NotBlank(message = "Campo descrição é Obrigatório.")
-    @Size(message = "Tamanho da descrição deve estar entre 5 e 50.", min = 5, max = 50)
+    @Size(message = "O tamanho da descrição deve estar entre 5 e 50.", min = 5, max = 50)
     private String descricao;
 
     public String getSku() {
