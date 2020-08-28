@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
+
 <h1>manuelernest0 is on</h1>
-<form method="POST">
-    <span th:text="${mensagem}"></span>
+<form method="POST" th:object="${cerveja}">
+
+    <div th:each="erro: ${#fields.detailedErrors()}">
+        <span th:text="${erro.message}"></span>
+    </div>
+
+    <br>
     <label for="sku">SKU</label>
     <input type="text" name="sku" id="sku">
     <br>
@@ -19,7 +26,8 @@
     <input type="text" name="descricao" id="descricao">
     <br>
     <input type="submit" value="Salvar">
-
 </form>
+
 </body>
+
 </html>
