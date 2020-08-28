@@ -2,7 +2,6 @@ package io.github.manuelernesto.Model;
 
 
 import org.hibernate.validator.constraints.NotBlank;
-
 import javax.validation.constraints.Size;
 
 public class Cerveja {
