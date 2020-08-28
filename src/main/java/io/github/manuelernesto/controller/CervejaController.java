@@ -14,17 +14,15 @@ import javax.validation.Valid;
 public class CervejaController {
 
     @RequestMapping("/cerveja/novo")
-    public String novo(Model model) {
-        model.addAttribute(new Cerveja());
+    public String novo(Cerveja cerveja) {
         return "cerveja/CadastroCerveja";
     }
 
     @RequestMapping(value = "/cerveja/novo", method = RequestMethod.POST)
     public String cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-        if (result.hasErrors()) {
-            model.addAttribute(cerveja);
-            return "cerveja/CadastroCerveja";
-        }
+        if (result.hasErrors())
+            return novo(cerveja);
+
 
         attributes.addFlashAttribute("mensagem", cerveja.getSku() + " Cerveja Cadastrada com sucesso!");
 
