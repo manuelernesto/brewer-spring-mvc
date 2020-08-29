@@ -29,10 +29,6 @@ public class CervejaController {
         return "redirect:/cerveja/novo";
     }
 
-    @RequestMapping("/cerveja/cadastro")
-    public String cadastro() {
-        return "cerveja/cadastro-produto";
-    }
 }
 
 
