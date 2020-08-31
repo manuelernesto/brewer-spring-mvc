@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="'layout/LayoutPadrao'">
+<head>
+    <title>Brewer | Cadastro de estilo</title>
+</head>
+
+<body>
+
+<section layout:fragment="conteudo">
+
+
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1>
+                Cadastro de Estilo
+            </h1>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+
+        <form method="post" th:object="${cerveja}" class="form-vertical  js-form-loading">
+
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn  btn-primary" type="submit">Salvar</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+</body>
+
+</html>
