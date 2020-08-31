@@ -31,7 +31,7 @@ public class CervejaController {
 
     @RequestMapping("/cliente/novo")
     public String cliente() {
-        return "usuario/CadastroUsuario";
+        return "cidade/CadastroCidade";
     }
 }
 
