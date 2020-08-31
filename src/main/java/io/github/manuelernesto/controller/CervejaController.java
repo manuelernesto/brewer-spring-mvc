@@ -29,6 +29,10 @@ public class CervejaController {
         return "redirect:/cerveja/novo";
     }
 
+    @RequestMapping("/cliente/novo")
+    public String cliente() {
+        return "cliente/CadastroCliente";
+    }
 }
 
 
