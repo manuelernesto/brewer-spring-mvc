@@ -5,6 +5,7 @@
       layout:decorator="'layout/LayoutPadrao'">
 <head>
     <title>Brewer | Cadastro de usuário</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}"/>
 </head>
 
 <body>
@@ -63,13 +64,11 @@
                     <input id="confirmacaoSenha" type="password" class="form-control"/>
                 </div>
 
-                <div class="col-sm-4 form-group">
-                    <label for="status">Status</label>
+                <div class="col-sm-3 form-group">
+                    <label for="status">Estado</label>
                     <div id="status">
-                        <div class="checkbox checkbox-inline">
-                            <input type="checkbox">
-                            <label>Ativo</label>
-                        </div>
+                        <input type="checkbox" class="form-control js-status" data-off-color="danger"
+                               data-on-text="Ativo" data-off-text="Inativo">
                     </div>
                 </div>
 
@@ -101,6 +100,13 @@
     </div>
 
 </section>
+
+<th:block layout:fragment="javascript-extra">
+    <script th:src="@{/javascripts/vendors/bootstrap-switch.min.js}"></script>
+    <script>
+        $('.js-status').bootstrapSwitch();
+    </script>
+</th:block>
 
 </body>
 
