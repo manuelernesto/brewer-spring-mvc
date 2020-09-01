@@ -1,6 +1,8 @@
 package io.github.manuelernesto.controller;
 
 import io.github.manuelernesto.Model.Cerveja;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,8 +15,12 @@ import javax.validation.Valid;
 @Controller
 public class CervejaController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CervejaController.class);
+
     @RequestMapping("/cerveja/novo")
     public String novo(Cerveja cerveja) {
+        logger.error("NIVEL ERROR");
+        logger.info("NIVEL INFO");
         return "cerveja/CadastroCerveja";
     }
 
@@ -29,10 +35,6 @@ public class CervejaController {
         return "redirect:/cerveja/novo";
     }
 
-    @RequestMapping("/cliente/novo")
-    public String cliente() {
-        return "estilo/CadastroEstilo";
-    }
 }
 
 
