@@ -1,5 +1,6 @@
 package io.github.manuelernesto.config.init;
 
+import io.github.manuelernesto.config.JPAConfig;
 import io.github.manuelernesto.config.WebConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -10,7 +11,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[0];
+        return new Class<?>[]{JPAConfig.class};
     }
 
     @Override

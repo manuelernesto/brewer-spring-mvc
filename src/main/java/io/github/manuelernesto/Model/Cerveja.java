@@ -28,6 +28,7 @@ public class Cerveja implements Serializable {
     private String descricao;
 
     private BigDecimal valor;
+
     @Column(name = "teor_alcoolico")
     private BigDecimal teorAlcoolico;
 
