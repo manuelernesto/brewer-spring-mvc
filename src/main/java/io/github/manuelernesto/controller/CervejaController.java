@@ -17,12 +17,15 @@ import javax.validation.Valid;
 @Controller
 public class CervejaController {
 
-    @Autowired
-    private Cervejas cervejas;
+    private final Cervejas cervejas;
+
+    public CervejaController(Cervejas cervejas) {
+        this.cervejas = cervejas;
+    }
 
     @RequestMapping("/cerveja/novo")
     public String novo(Cerveja cerveja) {
-        cervejas.findAll();
+        cervejas.findBySku("JJAJ");
         return "cerveja/CadastroCerveja";
     }
 
