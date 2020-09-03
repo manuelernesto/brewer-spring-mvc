@@ -43,7 +43,7 @@ public class CervejaController {
 
 
         service.salvar(cerveja);
-        attributes.addFlashAttribute("mensagem", cerveja.getSku() + " Cerveja Cadastrada com sucesso!");
+        attributes.addFlashAttribute("mensagem", "Cerveja " + cerveja.getNome() + " cadastrada com sucesso!");
 
         return new ModelAndView("redirect:/cerveja/novo");
     }
