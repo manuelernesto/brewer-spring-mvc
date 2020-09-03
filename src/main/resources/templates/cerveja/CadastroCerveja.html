@@ -55,7 +55,7 @@
                 <div class="col-sm-3 form-group">
                     <label for="estilo">Estilo</label>
                     <div class="bw-field-action">
-                        <select id="estilo" class="form-control">
+                        <select id="estilo" class="form-control" th:field="*{estilo}">
                             <option value="">Selecione o estilo</option>
                             <option th:each="estilo: ${estilos}" th:value="${estilo.codigo}"
                                     th:text="${estilo.nome}"></option>
@@ -78,7 +78,8 @@
                 <div class="col-sm-3 form-group">
                     <label for="teor-alcoolico">Teor Alcoólico</label>
                     <div class="input-group">
-                        <input id="teor-alcoolico" type="text" class="form-control js-decimal" th:field="*{teorAlcoolico}"/>
+                        <input id="teor-alcoolico" type="text" class="form-control js-decimal"
+                               th:field="*{teorAlcoolico}"/>
                         <div class="input-group-addon">%</div>
                     </div>
                 </div>

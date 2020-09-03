@@ -41,6 +41,7 @@ public class CervejaController {
 //        if (result.hasErrors())
 //            return novo(cerveja);
 
+        System.out.println(">>>>> " + cerveja.getEstilo().getCodigo());
         attributes.addFlashAttribute("mensagem", cerveja.getSku() + " Cerveja Cadastrada com sucesso!");
 
         return new ModelAndView("redirect:/cerveja/novo");
