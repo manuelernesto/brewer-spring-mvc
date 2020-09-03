@@ -5,9 +5,7 @@ import io.github.manuelernesto.Model.Origem;
 import io.github.manuelernesto.Model.Sabor;
 import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.manuelernesto.service.CadastroCervejaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,9 +20,11 @@ import javax.validation.Valid;
 public class CervejaController {
 
     private final Estilos estilos;
+    private final CadastroCervejaService service;
 
-    public CervejaController(Estilos estilos) {
+    public CervejaController(Estilos estilos, CadastroCervejaService service) {
         this.estilos = estilos;
+        this.service = service;
     }
 
     @RequestMapping("/cerveja/novo")
@@ -38,10 +38,11 @@ public class CervejaController {
 
     @RequestMapping(value = "/cerveja/novo", method = RequestMethod.POST)
     public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
-//        if (result.hasErrors())
-//            return novo(cerveja);
+        if (result.hasErrors())
+            return novo(cerveja);
 
-        System.out.println(">>>>> " + cerveja.getEstilo().getCodigo());
+
+        service.salvar(cerveja);
         attributes.addFlashAttribute("mensagem", cerveja.getSku() + " Cerveja Cadastrada com sucesso!");
 
         return new ModelAndView("redirect:/cerveja/novo");
