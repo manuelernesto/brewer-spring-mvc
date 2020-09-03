@@ -1,6 +1,7 @@
 package io.github.manuelernesto.controller;
 
 import io.github.manuelernesto.Model.Cerveja;
+import io.github.manuelernesto.Model.Origem;
 import io.github.manuelernesto.Model.Sabor;
 import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
@@ -31,6 +32,7 @@ public class CervejaController {
         ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
         mv.addObject("sabores", Sabor.values());
         mv.addObject("estilos", estilos.findAll());
+        mv.addObject("origens", Origem.values());
         return mv;
     }
 

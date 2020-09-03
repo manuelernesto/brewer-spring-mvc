@@ -57,7 +57,8 @@
                     <div class="bw-field-action">
                         <select id="estilo" class="form-control">
                             <option value="">Selecione o estilo</option>
-                            <option th:each="estilo: ${estilos}" th:value="${estilo.codigo}" th:text="${estilo.nome}"></option>
+                            <option th:each="estilo: ${estilos}" th:value="${estilo.codigo}"
+                                    th:text="${estilo.nome}"></option>
                         </select>
                         <div class="bw-field-action__icon">
                             <a href="#" data-toggle="modal" data-target="#modalCadastroRapidoEstilo"><i
@@ -85,14 +86,12 @@
                 <div class="col-lg-3 col-sm-6 form-group">
                     <label for="origem">Origem</label>
                     <div id="origem">
-                        <div class="radio-inline">
-                            <input type="radio" id="nacional" name=origem"">
-                            <label for="nacional">Nacional</label>
-                        </div>
-                        <div class="radio-inline">
-                            <input type="radio" id="internacional" name=origem"">
-                            <label for="internacional">Internacional</label>
-                        </div>
+                        <th:block th:each="origem: ${origens}">
+                            <div class="radio-inline">
+                                <input type="radio" th:id="|id_${origem}|" th:value="${origem}" name=origem"">
+                                <label th:for="|id_${origem}|" th:text="${origem.descricao}"></label>
+                            </div>
+                        </th:block>
                     </div>
                 </div>
 
