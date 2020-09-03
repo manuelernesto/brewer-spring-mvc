@@ -57,6 +57,7 @@
                     <div class="bw-field-action">
                         <select id="estilo" class="form-control">
                             <option value="">Selecione o estilo</option>
+                            <option th:each="estilo: ${estilos}" th:value="${estilo.codigo}" th:text="${estilo.nome}"></option>
                         </select>
                         <div class="bw-field-action__icon">
                             <a href="#" data-toggle="modal" data-target="#modalCadastroRapidoEstilo"><i

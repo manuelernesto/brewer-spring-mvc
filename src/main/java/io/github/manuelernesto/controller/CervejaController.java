@@ -3,6 +3,7 @@ package io.github.manuelernesto.controller;
 import io.github.manuelernesto.Model.Cerveja;
 import io.github.manuelernesto.Model.Sabor;
 import io.github.manuelernesto.repository.Cervejas;
+import io.github.manuelernesto.repository.Estilos;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,17 @@ import javax.validation.Valid;
 @Controller
 public class CervejaController {
 
-    private final Cervejas cervejas;
+    private final Estilos estilos;
 
-    public CervejaController(Cervejas cervejas) {
-        this.cervejas = cervejas;
+    public CervejaController(Estilos estilos) {
+        this.estilos = estilos;
     }
 
     @RequestMapping("/cerveja/novo")
     public ModelAndView novo(Cerveja cerveja) {
         ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
         mv.addObject("sabores", Sabor.values());
+        mv.addObject("estilos", estilos.findAll());
         return mv;
     }
 
