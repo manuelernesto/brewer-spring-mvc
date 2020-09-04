@@ -1,9 +1,11 @@
 package io.github.manuelernesto.Model;
 
 
+import io.github.manuelernesto.validation.SKU;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ public class Cerveja implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
+    @SKU
     @NotBlank(message = "Campo SKU é Obrigatório.")
     private String sku;
 
