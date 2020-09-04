@@ -5,8 +5,7 @@ import io.github.manuelernesto.validation.SKU;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -30,22 +29,32 @@ public class Cerveja implements Serializable {
     @Size(message = "O tamanho da descrição deve estar entre 5 e 50.", min = 5, max = 50)
     private String descricao;
 
+    @NotNull(message = "Valor é obrigatório")
+    @DecimalMin("0.01")
+    @DecimalMax(value = "9999999.99", message = "Valor deve ser menor que 9.999.999,99 AOA")
     private BigDecimal valor;
 
+    @DecimalMax(value = "100.0", message = "Teor Alcóolico deve ser menor que 100")
+    @NotNull(message = "Teor Alcóolico é obrigatório")
     @Column(name = "teor_alcoolico")
     private BigDecimal teorAlcoolico;
 
+    @DecimalMax(value = "100.0", message = "Comissão deve ser menor ou igual 100")
     private BigDecimal comissao;
 
+    @Max(value = 9999, message = "A quantidade em estoque deve ser menos que 9.999")
     @Column(name = "quantidade_estoque")
     private Integer quantidadeEstoque;
 
+    @NotNull(message = "A origem é obrigatório")
     @Enumerated(EnumType.STRING)
     private Origem origem;
 
+    @NotNull(message = "O sabor é obrigatório")
     @Enumerated(EnumType.STRING)
     private Sabor sabor;
 
+    @NotNull(message = "O estilo é obrigatório")
     @ManyToOne
     @JoinColumn(name = "codigo_estilo")
     private Estilo estilo;
