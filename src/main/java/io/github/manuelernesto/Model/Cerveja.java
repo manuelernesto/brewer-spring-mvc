@@ -29,9 +29,9 @@ public class Cerveja implements Serializable {
     @Size(message = "O tamanho da descrição deve estar entre 5 e 50.", min = 5, max = 50)
     private String descricao;
 
-    @NotNull(message = "Valor é obrigatório")
+    @NotNull(message = "O preço é obrigatório")
     @DecimalMin("0.01")
-    @DecimalMax(value = "9999999.99", message = "Valor deve ser menor que 9.999.999,99 AOA")
+    @DecimalMax(value = "9999999.99", message = "O preço deve ser menor que 9.999.999,99 AOA")
     private BigDecimal valor;
 
     @DecimalMax(value = "100.0", message = "Teor Alcóolico deve ser menor que 100")
