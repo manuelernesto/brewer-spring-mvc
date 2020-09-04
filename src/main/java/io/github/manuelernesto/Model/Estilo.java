@@ -1,6 +1,9 @@
 package io.github.manuelernesto.Model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +16,8 @@ public class Estilo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
+    @NotBlank(message = "Campo nome é Obrigatório.")
+    @Size(message = "O tamanho do estilo deve estar entre 5 e 15.", min = 5, max = 15)
     private String nome;
 
     @OneToMany(mappedBy = "estilo")
