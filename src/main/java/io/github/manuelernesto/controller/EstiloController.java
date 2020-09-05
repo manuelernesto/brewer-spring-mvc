@@ -8,11 +8,15 @@ import io.github.manuelernesto.repository.Estilos;
 import io.github.manuelernesto.service.CadastroCervejaService;
 import io.github.manuelernesto.service.CadastroEstiloService;
 import io.github.manuelernesto.service.exception.NomeJaCadastradoException;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -47,6 +51,21 @@ public class EstiloController {
 
         attributes.addFlashAttribute("mensagem", "Estilo " + estilo.getNome() + " cadastrado com sucesso!");
         return new ModelAndView("redirect:/estilo/novo");
+    }
+
+    @RequestMapping(value = "/estilo", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody
+    ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
+        if (result.hasErrors())
+            return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+
+        try {
+            estilo = service.salvar(estilo);
+        } catch (NomeJaCadastradoException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+        return ResponseEntity.ok(estilo);
     }
 
 }
