@@ -7,6 +7,7 @@ import io.github.manuelernesto.Model.Sabor;
 import io.github.manuelernesto.repository.Estilos;
 import io.github.manuelernesto.service.CadastroCervejaService;
 import io.github.manuelernesto.service.CadastroEstiloService;
+import io.github.manuelernesto.service.exception.NomeJaCadastradoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,9 +38,14 @@ public class EstiloController {
             return novo(estilo);
 
 
-        service.salvar(estilo);
-        attributes.addFlashAttribute("mensagem", "Estilo " + estilo.getNome() + " cadastrado com sucesso!");
+        try {
+            service.salvar(estilo);
+        } catch (NomeJaCadastradoException e) {
+            result.rejectValue("nome", e.getMessage(), e.getMessage());
+            return novo(estilo);
+        }
 
+        attributes.addFlashAttribute("mensagem", "Estilo " + estilo.getNome() + " cadastrado com sucesso!");
         return new ModelAndView("redirect:/estilo/novo");
     }
 
