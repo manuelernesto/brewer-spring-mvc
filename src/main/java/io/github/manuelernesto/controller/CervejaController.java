@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/cerveja")
 public class CervejaController {
 
     private final Estilos estilos;
@@ -27,7 +28,7 @@ public class CervejaController {
         this.service = service;
     }
 
-    @RequestMapping("/cerveja/novo")
+    @RequestMapping("/novo")
     public ModelAndView novo(Cerveja cerveja) {
         ModelAndView mv = new ModelAndView("cerveja/CadastroCerveja");
         mv.addObject("sabores", Sabor.values());
@@ -36,7 +37,7 @@ public class CervejaController {
         return mv;
     }
 
-    @RequestMapping(value = "/cerveja/novo", method = RequestMethod.POST)
+    @RequestMapping(value = "/novo", method = RequestMethod.POST)
     public ModelAndView cadastrar(@Valid Cerveja cerveja, BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors())
             return novo(cerveja);

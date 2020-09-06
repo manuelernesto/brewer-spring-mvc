@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/estilo")
 public class EstiloController {
 
     private final CadastroEstiloService service;
@@ -31,12 +32,12 @@ public class EstiloController {
         this.service = service;
     }
 
-    @RequestMapping("/estilo/novo")
+    @RequestMapping("/novo")
     public ModelAndView novo(Estilo estilo) {
         return new ModelAndView("estilo/CadastroEstilo");
     }
 
-    @RequestMapping(value = "/estilo/novo", method = RequestMethod.POST)
+    @RequestMapping(value = "/novo", method = RequestMethod.POST)
     public ModelAndView cadastrar(@Valid Estilo estilo, BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors())
             return novo(estilo);
@@ -53,7 +54,7 @@ public class EstiloController {
         return new ModelAndView("redirect:/estilo/novo");
     }
 
-    @RequestMapping(value = "/estilo", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody
     ResponseEntity<?> salvar(@RequestBody @Valid Estilo estilo, BindingResult result) {
         if (result.hasErrors())
