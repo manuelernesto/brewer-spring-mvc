@@ -1,6 +1,6 @@
-var Vimo = Vimo || {};
+let Brewer = Brewer || {};
 
-Vimo.PhotoUpload = (function () {
+Brewer.PhotoUpload = (function () {
     function PhotoUpload() {
         this.inputPhotoName = $('input[name=foto]');
         this.inputContentType = $('input[name=contentType]');
@@ -14,7 +14,7 @@ Vimo.PhotoUpload = (function () {
     }
 
     PhotoUpload.prototype.init = function () {
-        var settings = {
+        let settings = {
             type: 'json',
             filelimit: 1,
             allow: '*.(jpg|jpeg|png)',
@@ -35,7 +35,7 @@ Vimo.PhotoUpload = (function () {
         this.inputContentType.val(response.contentType);
 
         this.uploadDrop.addClass('hidden');
-        var htmlFotoCerveja = this.template({photoName: response.nome})
+        let htmlFotoCerveja = this.template({photoName: response.nome})
 
         this.containerPhotoCerveja.append(htmlFotoCerveja);
 
@@ -54,6 +54,6 @@ Vimo.PhotoUpload = (function () {
 
 
 $(function () {
-    var photoUpload = new Vimo.PhotoUpload();
+    let photoUpload = new Brewer.PhotoUpload();
     photoUpload.init();
 });
