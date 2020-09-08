@@ -2,6 +2,7 @@ package io.github.manuelernesto.thymeleaf;
 
 
 import io.github.manuelernesto.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
+import io.github.manuelernesto.thymeleaf.processor.MessageElementTagProcessor;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.StandardDialect;
@@ -23,6 +24,7 @@ public class BrewerDialect extends AbstractProcessorDialect {
     public Set<IProcessor> getProcessors(String dialectPrefix) {
         final Set<IProcessor> processors = new HashSet<>();
         processors.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
+        processors.add(new MessageElementTagProcessor(dialectPrefix));
         return processors;
     }
 }
