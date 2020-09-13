@@ -2,7 +2,9 @@ package io.github.manuelernesto.controller;
 
 
 import io.github.manuelernesto.dto.FotoDTO;
+import io.github.manuelernesto.storage.FotoStorage;
 import io.github.manuelernesto.storage.FotoStorageRunnable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/fotos")
 public class FotosController {
 
+    private final FotoStorage fotoStorage;
+
+    public FotosController(FotoStorage fotoStorage) {
+        this.fotoStorage = fotoStorage;
+    }
+
     @PostMapping
     public DeferredResult<FotoDTO> upload(@RequestParam("files[]") MultipartFile[] files) {
         DeferredResult<FotoDTO> result = new DeferredResult<>();
-        Thread thread = new Thread(new FotoStorageRunnable(files, result));
+        Thread thread = new Thread(new FotoStorageRunnable(files, result, fotoStorage));
         thread.start();
         return result;
     }

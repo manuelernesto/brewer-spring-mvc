@@ -6,20 +6,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FotoStorageRunnable implements Runnable {
 
-    private MultipartFile[] file;
+    private MultipartFile[] files;
     private DeferredResult<FotoDTO> result;
+    private FotoStorage fotoStorage;
 
-    public FotoStorageRunnable(MultipartFile[] files, DeferredResult<FotoDTO> result) {
-        this.file = files;
+    public FotoStorageRunnable(MultipartFile[] files, DeferredResult<FotoDTO> result, FotoStorage fotoStorage) {
+        this.files = files;
         this.result = result;
+        this.fotoStorage = fotoStorage;
     }
 
     @Override
     public void run() {
-        System.out.println(">>>>> file: " + file[0].getSize());
+
         //TODO save the photo to the file system
-        String photoName = file[0].getOriginalFilename();
-        String contentType = file[0].getContentType();
+        this.fotoStorage.salvarTemporariamente(files);
+
+        String photoName = files[0].getOriginalFilename();
+        String contentType = files[0].getContentType();
         result.setResult(new FotoDTO(photoName, contentType));
     }
 }
