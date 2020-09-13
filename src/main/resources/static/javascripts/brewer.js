@@ -1,4 +1,4 @@
-let Brewer = Brewer || {};
+var Brewer = Brewer || {};
 
 Brewer.MaskMoney = (function () {
 
