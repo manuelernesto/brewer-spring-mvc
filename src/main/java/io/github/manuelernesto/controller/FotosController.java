@@ -15,4 +15,5 @@ public class FotosController {
     public String upload(@RequestParam("files[]") MultipartFile[] files) {
         return "Ok";
     }
+
 }
