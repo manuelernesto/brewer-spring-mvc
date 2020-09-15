@@ -136,12 +136,14 @@
 
 
     <div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
+    <th:block th:replace="hbs/FotoCerveja"/>
 </section>
 
 <th:block layout:fragment="javascript-extra">
     <script th:src="@{/javascripts/estio.cadastro-rapido.js}"></script>
     <script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
     <script th:src="@{/javascripts/vendors/upload.min.js}"></script>
+    <script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
     <script th:src="@{/javascripts/cerveja-upload-photo.js}"></script>
 </th:block>
 
