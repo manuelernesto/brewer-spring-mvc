@@ -7,9 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 
 public class FotoStorageLocal implements FotoStorage {
 
@@ -43,11 +45,64 @@ public class FotoStorageLocal implements FotoStorage {
     }
 
     @Override
-    public void salvarTemporariamente(MultipartFile[] file) {
-        System.out.println("SALVANDO A FOTO TEMP...");
+    public String salvarTemporariamente(MultipartFile[] files) {
+        String nome = null;
+        if (files != null && files.length > 0) {
+            MultipartFile file = files[0];
+            nome = renomearArquivo(file.getOriginalFilename());
+            try {
+                file.transferTo(new File(this.localTemp.toAbsolutePath().toString() + getDefault().getSeparator() + nome));
+            } catch (IOException e) {
+                throw new RuntimeException("Erro salvado a foto na pasta temporaria");
+            }
+
+        }
+        return nome;
     }
 
+
+    private String renomearArquivo(String nomeOriginal) {
+        return UUID.randomUUID().toString() + "_" + nomeOriginal;
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
