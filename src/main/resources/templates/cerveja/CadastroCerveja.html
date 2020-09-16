@@ -119,7 +119,7 @@
                     <input type="hidden" th:field="*{contentType}">
                     <label for="upload-drop" class="control-label">Foto</label>
 
-                    <div class="js-container-foto-cerveja">
+                    <div class="js-container-foto-cerveja" th:attr="data-url-fotos=@{/fotos}">
                         <div id="upload-drop" class="bw-upload">
                             <i class="glyphicon glyphicon-cloud-upload"></i>
                             <span>Arraste a foto aqui ou</span>
