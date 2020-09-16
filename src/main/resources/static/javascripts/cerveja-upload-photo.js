@@ -66,8 +66,27 @@ $(function () {
         allow: '*.(jpg|jpeg|png)',
         action: '/brewer/fotos',
         complete: function (response) {
-            $('input[name=foto]').val(response.nome)
-            $('input[name=contentType]').val(response.contentType)
+            let inputNomeFoto = $('input[name=foto]');
+            let inputContentType = $('input[name=contentType]');
+            let htmlFotoCervejaTemplate = $("#foto-cerveja").html();
+            let template = Handlebars.compile(htmlFotoCervejaTemplate);
+            let htmlFotoCerveja = template({nomeFoto: response.nome});
+            let containerPhotoCerveja = $('.js-container-foto-cerveja');
+            let uploaDrop = $('#upload-drop');
+
+            inputNomeFoto.val(response.nome);
+            inputContentType.val(response.contentType);
+
+            uploaDrop.addClass('hidden');
+
+            containerPhotoCerveja.append(htmlFotoCerveja);
+
+            $('.js-remove-foto').on('click', function () {
+                $('.js-foto-cerveja').remove();
+                uploaDrop.removeClass('hidden');
+                inputNomeFoto.val('');
+                inputContentType.val('');
+            });
         }
     }
 
@@ -75,3 +94,10 @@ $(function () {
     UIkit.uploadDrop($(this.uploadDrop), settings);
 
 });
+
+
+
+
+
+
+
