@@ -10,7 +10,7 @@ Brewer.UploadFoto = (function () {
         this.template = Handlebars.compile(this.htmlFotoCervejaTemplate);
 
         this.containerPhotoCerveja = $('.js-container-foto-cerveja');
-        this.uploaDrop = $('#upload-drop');
+        this.uploadDrop = $('#upload-drop');
     }
 
     UploadFoto.prototype.init = function () {
@@ -36,22 +36,22 @@ Brewer.UploadFoto = (function () {
 
         this.uploadDrop.addClass('hidden');
 
-        let htmlFotoCerveja = this.template({nomeFoto: this.response.nome});
+        let htmlFotoCerveja = this.template({nomeFoto: response.nome});
 
         this.containerPhotoCerveja.append(htmlFotoCerveja);
 
         $('.js-remove-foto').on('click', onRemovePhoto.bind(this));
     }
 
-
     function onRemovePhoto() {
         $('.js-foto-cerveja').remove();
-        this.uploaDrop.removeClass('hidden');
+        this.uploadDrop.removeClass('hidden');
         this.inputNomeFoto.val('');
         this.inputContentType.val('');
     }
 
-    return UploadFoto();
+    return UploadFoto;
+
 })();
 
 
