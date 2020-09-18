@@ -23,10 +23,12 @@ public class CervejaController {
 
     private final Estilos estilos;
     private final CadastroCervejaService service;
+    private final Cervejas cervejas;
 
-    public CervejaController(Estilos estilos, CadastroCervejaService service) {
+    public CervejaController(Estilos estilos, CadastroCervejaService service, Cervejas cervejas) {
         this.estilos = estilos;
         this.service = service;
+        this.cervejas = cervejas;
     }
 
     @RequestMapping("/novo")
@@ -53,8 +55,10 @@ public class CervejaController {
     @GetMapping
     public ModelAndView pesquisar() {
         ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
-
-
+        mv.addObject("estilos", estilos.findAll());
+        mv.addObject("sabores", Sabor.values());
+        mv.addObject("origens", Origem.values());
+        mv.addObject("cervejas", cervejas.findAll());
         return mv;
     }
 }
