@@ -42,7 +42,8 @@
         <spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
         <!-- Jackson - JSON -->
         <jackson-core.version>2.7.5</jackson-core.version>
-
+        <!-- thumbnailator - Gerar Thumbnair -->
+        <thumbnailator.version>0.4.8</thumbnailator.version>
     </properties>
 
     <dependencyManagement>
@@ -174,6 +175,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- thumbnailator - Gerar Thumbnair -->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

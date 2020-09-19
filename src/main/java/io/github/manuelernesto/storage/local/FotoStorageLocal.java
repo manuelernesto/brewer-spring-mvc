@@ -3,6 +3,8 @@ package io.github.manuelernesto.storage.local;
 import static java.nio.file.FileSystems.getDefault;
 
 import io.github.manuelernesto.storage.FotoStorage;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,13 +64,33 @@ public class FotoStorageLocal implements FotoStorage {
 
     @Override
     public void salvar(String foto) {
+        try {
+            Files.move(this.localTemp.resolve(foto), this.local.resolve(foto));
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao mover a foto para o destino final");
+        }
 
+        try {
+            Thumbnails.of(this.local.resolve(foto).toString())
+                    .size(40, 68).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro gerando o thumbnail");
+        }
     }
 
     @Override
-    public byte[] recuperarFotoTemp(String nome) {
+    public byte[] recuperarFoto(String foto) {
         try {
-            return Files.readAllBytes(this.localTemp.resolve(nome));
+            return Files.readAllBytes(this.local.resolve(foto));
+        } catch (IOException e) {
+            throw new RuntimeException("Erro lendo a foto");
+        }
+    }
+
+    @Override
+    public byte[] recuperarFotoTemp(String foto) {
+        try {
+            return Files.readAllBytes(this.localTemp.resolve(foto));
         } catch (IOException e) {
             throw new RuntimeException("Erro lendo a foto temporaria");
         }

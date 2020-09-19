@@ -3,6 +3,7 @@ package io.github.manuelernesto.Model;
 
 import io.github.manuelernesto.validation.SKU;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -174,6 +175,10 @@ public class Cerveja implements Serializable {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public String fotoOrMock() {
+        return !StringUtils.isEmpty(foto) ? foto : "cerveja-mock.png";
     }
 
     @Override
