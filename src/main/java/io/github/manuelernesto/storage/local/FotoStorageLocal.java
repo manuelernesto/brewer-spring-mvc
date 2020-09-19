@@ -61,6 +61,11 @@ public class FotoStorageLocal implements FotoStorage {
     }
 
     @Override
+    public void salvar(String foto) {
+
+    }
+
+    @Override
     public byte[] recuperarFotoTemp(String nome) {
         try {
             return Files.readAllBytes(this.localTemp.resolve(nome));
