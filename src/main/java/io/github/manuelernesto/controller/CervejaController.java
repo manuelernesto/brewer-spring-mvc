@@ -5,6 +5,7 @@ import io.github.manuelernesto.Model.Origem;
 import io.github.manuelernesto.Model.Sabor;
 import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
+import io.github.manuelernesto.repository.filter.CervejaFilter;
 import io.github.manuelernesto.service.CadastroCervejaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,7 @@ public class CervejaController {
     }
 
     @GetMapping
-    public ModelAndView pesquisar() {
+    public ModelAndView pesquisar(CervejaFilter cervejaFilter) {
         ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
         mv.addObject("estilos", estilos.findAll());
         mv.addObject("sabores", Sabor.values());
