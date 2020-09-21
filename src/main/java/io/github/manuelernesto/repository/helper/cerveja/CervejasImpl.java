@@ -25,27 +25,14 @@ public class CervejasImpl implements CervejasQueries {
         Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
 
         if (filter != null) {
-            if (!StringUtils.isEmpty(filter.getSku())) {
-                criteria.add(Restrictions.eq("sku", filter.getSku()));
-            }
-            if (!StringUtils.isEmpty(filter.getNome())) {
+            if (!StringUtils.isEmpty(filter.getSku())) criteria.add(Restrictions.eq("sku", filter.getSku()));
+            if (!StringUtils.isEmpty(filter.getNome()))
                 criteria.add(Restrictions.ilike("nome", filter.getNome(), MatchMode.ANYWHERE));
-            }
-            if (isEstilo(filter)) {
-                criteria.add(Restrictions.eq("estilo", filter.getEstilo()));
-            }
-            if (filter.getSabor() != null) {
-                criteria.add(Restrictions.eq("sabor", filter.getSabor()));
-            }
-            if (filter.getOrigem() != null) {
-                criteria.add(Restrictions.eq("origem", filter.getOrigem()));
-            }
-            if (filter.getValorDe() != null) {
-                criteria.add(Restrictions.ge("valor", filter.getValorDe()));
-            }
-            if (filter.getValorAte() != null) {
-                criteria.add(Restrictions.le("valor", filter.getValorAte()));
-            }
+            if (isEstilo(filter)) criteria.add(Restrictions.eq("estilo", filter.getEstilo()));
+            if (filter.getSabor() != null) criteria.add(Restrictions.eq("sabor", filter.getSabor()));
+            if (filter.getOrigem() != null) criteria.add(Restrictions.eq("origem", filter.getOrigem()));
+            if (filter.getValorDe() != null) criteria.add(Restrictions.ge("valor", filter.getValorDe()));
+            if (filter.getValorAte() != null) criteria.add(Restrictions.le("valor", filter.getValorAte()));
         }
 
         return criteria.list();
