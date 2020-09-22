@@ -142,7 +142,8 @@
         </div>
 
         <div class="col-sm-12 text-center" th:if="${not #lists.isEmpty(page.content)}">
-            <ul class="pagination pagination-sm">
+            <ul class="pagination pagination-sm"
+                th:with="paginaActual = ${page.number}">
                 <li>
                     <a href="#">
                         <span>&laquo;</span>
@@ -150,9 +151,10 @@
                 </li>
 
 
-                <th:block th:each="p : ${#numbers.sequence(1,page.totalPages)}">
-                    <li>
-                        <a th:href="|?page=${p-1}|">[[${p}]]</a>
+                <th:block th:each="p : ${#numbers.sequence(1,page.totalPages)}"
+                          th:with="numeroPagina = ${p-1}">
+                    <li th:class="${paginaActual == numeroPagina}? active">
+                        <a th:href="|?page=${numeroPagina}|">[[${p}]]</a>
                     </li>
                 </th:block>
 
