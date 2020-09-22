@@ -145,9 +145,11 @@
             <ul class="pagination pagination-sm"
                 th:with="paginaActual = ${page.number}">
                 <li th:class="${page.first}? disabled ">
-                    <a href="#">
+
+                    <a th:href="|?page=${paginaActual - 1}|" th:remove="${page.first}? tag">
                         <span>&laquo;</span>
                     </a>
+
                 </li>
 
 
@@ -160,9 +162,10 @@
 
 
                 <li th:class="${page.last}? disabled ">
-                    <a href="#">
+                    <a th:href="|?page=${paginaActual + 1}|" th:remove="${page.last}? tag">
                         <span>&raquo;</span>
                     </a>
+
                 </li>
             </ul>
         </div>
