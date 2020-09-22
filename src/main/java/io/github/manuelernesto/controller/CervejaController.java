@@ -7,6 +7,7 @@ import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
 import io.github.manuelernesto.repository.filter.CervejaFilter;
 import io.github.manuelernesto.service.CadastroCervejaService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -61,7 +62,9 @@ public class CervejaController {
         mv.addObject("estilos", estilos.findAll());
         mv.addObject("sabores", Sabor.values());
         mv.addObject("origens", Origem.values());
-        mv.addObject("cervejas", cervejas.filtrar(cervejaFilter, pageable));
+
+        Page<Cerveja> page = cervejas.filtrar(cervejaFilter, pageable);
+        mv.addObject("page", page);
         return mv;
     }
 }
