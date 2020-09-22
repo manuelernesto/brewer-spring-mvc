@@ -7,6 +7,7 @@ import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
 import io.github.manuelernesto.repository.filter.CervejaFilter;
 import io.github.manuelernesto.service.CadastroCervejaService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,7 +55,7 @@ public class CervejaController {
     }
 
     @GetMapping
-    public ModelAndView pesquisar(CervejaFilter cervejaFilter, BindingResult result) {
+    public ModelAndView pesquisar(CervejaFilter cervejaFilter, BindingResult result, Pageable page) {
         ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
         mv.addObject("estilos", estilos.findAll());
         mv.addObject("sabores", Sabor.values());
