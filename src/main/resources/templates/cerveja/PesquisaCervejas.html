@@ -141,7 +141,7 @@
 
         </div>
 
-        <div class="col-sm-12 text-center">
+        <div class="col-sm-12 text-center" th:if="${not #lists.isEmpty(page.content)}">
             <ul class="pagination pagination-sm">
                 <li>
                     <a href="#">
