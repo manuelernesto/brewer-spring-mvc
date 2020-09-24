@@ -13,9 +13,9 @@ public class PageWrapper<T> {
         this.page = page;
     }
 
-//    public List<T> getConteudo() {
-//        return page.getContent();
-//    }
+    public List<T> getContent() {
+        return page.getContent();
+    }
 
     public boolean isEmpty() {
         return page.getContent().isEmpty();
