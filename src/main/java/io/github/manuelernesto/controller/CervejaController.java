@@ -3,6 +3,7 @@ package io.github.manuelernesto.controller;
 import io.github.manuelernesto.Model.Cerveja;
 import io.github.manuelernesto.Model.Origem;
 import io.github.manuelernesto.Model.Sabor;
+import io.github.manuelernesto.controller.page.PageWrapper;
 import io.github.manuelernesto.repository.Cervejas;
 import io.github.manuelernesto.repository.Estilos;
 import io.github.manuelernesto.repository.filter.CervejaFilter;
@@ -63,8 +64,8 @@ public class CervejaController {
         mv.addObject("sabores", Sabor.values());
         mv.addObject("origens", Origem.values());
 
-        Page<Cerveja> page = cervejas.filtrar(cervejaFilter, pageable);
-        mv.addObject("page", page);
+        PageWrapper<Cerveja> pageWrapper = new PageWrapper<>(cervejas.filtrar(cervejaFilter, pageable));
+        mv.addObject("page", pageWrapper);
         return mv;
     }
 }

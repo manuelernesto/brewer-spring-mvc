@@ -133,7 +133,7 @@
                         </a>
                     </td>
                 </tr>
-                <tr th:if="${#lists.isEmpty(page.content)}">
+                <tr th:if="${page.empty}">
                     <td colspan="7">Nenhuma cerveja encontrada!</td>
                 </tr>
                 </tbody>
