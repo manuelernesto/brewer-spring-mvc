@@ -20,4 +20,21 @@ public class PageWrapper<T> {
     public boolean isEmpty() {
         return page.getContent().isEmpty();
     }
+
+    public int getNumber() {
+        return page.getNumber();
+    }
+
+    public int getTotalPages() {
+        return page.getTotalPages();
+    }
+
+    public boolean isLast() {
+        return page.isLast();
+    }
+
+    public boolean isFirst() {
+        return page.isFirst();
+    }
+
 }
