@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -58,13 +59,22 @@ public class CervejaController {
     }
 
     @GetMapping
-    public ModelAndView pesquisar(CervejaFilter cervejaFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable) {
+    public ModelAndView pesquisar(
+            CervejaFilter cervejaFilter,
+            BindingResult result,
+            @PageableDefault(size = 2) Pageable pageable,
+            HttpServletRequest httpServletRequest) {
+
+
         ModelAndView mv = new ModelAndView("cerveja/PesquisaCervejas");
         mv.addObject("estilos", estilos.findAll());
         mv.addObject("sabores", Sabor.values());
         mv.addObject("origens", Origem.values());
 
-        PageWrapper<Cerveja> pageWrapper = new PageWrapper<>(cervejas.filtrar(cervejaFilter, pageable));
+        PageWrapper<Cerveja> pageWrapper = new PageWrapper<>(
+                cervejas.filtrar(cervejaFilter, pageable),
+                httpServletRequest);
+
         mv.addObject("page", pageWrapper);
         return mv;
     }
