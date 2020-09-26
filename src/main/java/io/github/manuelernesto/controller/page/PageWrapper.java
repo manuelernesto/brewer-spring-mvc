@@ -47,7 +47,25 @@ public class PageWrapper<T> {
     }
 
     public String urlToPage(int page) {
-        return uriBuilder.replaceQueryParam("page", page).toUriString();
+        return uriBuilder.replaceQueryParam("page", page)
+                .build(true)
+                .encode()
+                .toUriString();
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
