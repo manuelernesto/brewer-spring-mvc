@@ -105,10 +105,12 @@
                 <tr>
                     <th class="table-cervejas-col-foto"></th>
                     <th class="table-cervejas-col-sku">
-                        SKU
-                        <span class="dropup">
+                        <a th:href="{page.orderUrl('sku')}">
+                            SKU
+                            <span class="dropup">
                             <span class="caret"></span>
                         </span>
+                        </a>
                     </th>
                     <th class="table-cervejas-col-nome">
                         Nome
