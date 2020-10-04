@@ -1,6 +1,8 @@
 package io.github.manuelernesto.controller.page;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -9,8 +11,8 @@ import java.util.List;
 
 public class PageWrapper<T> {
 
-    private Page<T> page;
-    private UriComponentsBuilder uriBuilder;
+    private final Page<T> page;
+    private final UriComponentsBuilder uriBuilder;
 
     public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest) {
         super();
@@ -57,10 +59,37 @@ public class PageWrapper<T> {
         UriComponentsBuilder uriBuilderOrder = UriComponentsBuilder
                 .fromUriString(uriBuilder.build(true).encode().toUriString());
 
-        return uriBuilderOrder.replaceQueryParam("sort", field).build(true).encode().toUriString();
+
+        String valueSorted = String.format("%s,%s", field, invertOrder(field));
+
+        return uriBuilderOrder.replaceQueryParam("sort", valueSorted).build(true).encode().toUriString();
     }
 
+    private String invertOrder(String field) {
+        String direction = "asc";
+
+        Order order = page.getSort() != null ? page.getSort().getOrderFor(field) : null;
+        if (order != null)
+            direction = Sort.Direction.ASC.equals(order.getDirection()) ? "desc" : "asc";
+
+        return direction;
+    }
+
+    public boolean descendent(String field) {
+        return invertOrder(field).equals("asc");
+    }
+
+    public boolean ordered(String field) {
+        Order order = page.getSort() != null ? page.getSort().getOrderFor(field) : null;
+
+        if (order == null)
+            return false;
+
+
+        return page.getSort().getOrderFor(field) != null ? true : false;
+    }
 }
+
 
 
 

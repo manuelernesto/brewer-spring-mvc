@@ -105,19 +105,21 @@
                 <tr>
                     <th class="table-cervejas-col-foto"></th>
                     <th class="table-cervejas-col-sku">
-                        <a th:href="{page.orderUrl('sku')}">
+                        <a th:href="${page.orderUrl('sku')}">
                             SKU
-                            <span class="dropup">
-                            <span class="caret"></span>
-                        </span>
+                            <span class="dropup" th:remove="${page.descendent('sku')} ? tag"
+                                  th:if="${page.ordered('sku')}">
+                                <span class="caret"></span>
+                            </span>
                         </a>
                     </th>
                     <th class="table-cervejas-col-nome">
-                        <a th:href="{page.orderUrl('nome')}">
+                        <a th:href="${page.orderUrl('nome')}">
                             Nome
-                            <span class="dropup">
-                            <span class="caret"></span>
-                        </span>
+                            <span class="dropup" th:remove="${page.descendent('nome')} ? tag"
+                                  th:if="${page.ordered('nome')}">
+                                <span class="caret"></span>
+                            </span>
                         </a>
                     </th>
                     <th class="table-cervejas-col-estilo">Estilo</th>
