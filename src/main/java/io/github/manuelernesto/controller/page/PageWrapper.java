@@ -53,8 +53,11 @@ public class PageWrapper<T> {
                 .toUriString();
     }
 
-    public String orderUrl(String field){
+    public String orderUrl(String field) {
+        UriComponentsBuilder uriBuilderOrder = UriComponentsBuilder
+                .fromUriString(uriBuilder.build(true).encode().toUriString());
 
+        return uriBuilderOrder.replaceQueryParam("sort", field).build(true).encode().toUriString();
     }
 
 }
