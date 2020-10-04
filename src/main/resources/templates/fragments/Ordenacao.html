@@ -2,11 +2,11 @@
 <html lang="pt"
       xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:fragment="order (page, propriety, field)">
-    <a th:href="${page.orderUrl(propriety)}">
-        <span th:text="${field}"></span>
-        <span class="dropup" th:remove="${page.descendent(propriety)} ? tag"
-              th:if="${page.ordered(propriety)}">
+<th:block th:fragment="order (page, field, text)">
+    <a th:href="${page.orderUrl(field)}">
+        <span th:text="${text}"></span>
+        <span class="dropup" th:remove="${page.descendent(field)} ? tag"
+              th:if="${page.ordered(field)}">
        <span class="caret"></span>
     </span>
     </a>

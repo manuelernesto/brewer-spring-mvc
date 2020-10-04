@@ -105,10 +105,10 @@
                 <tr>
                     <th class="table-cervejas-col-foto"></th>
                     <th class="table-cervejas-col-sku">
-                        <th:block th:replace="fragments/Ordenacao :: order(${page},'sku','SKU')"/>
+                        <brewer:order page="${page}" field="sku" text="SKU"/>
                     </th>
                     <th class="table-cervejas-col-nome">
-                        <th:block th:replace="fragments/Ordenacao :: order(${page},'nome','Nome')"/>
+                        <brewer:order page="${page}" field="nome" text="Nome"/>
                     </th>
                     <th class="table-cervejas-col-estilo">Estilo</th>
                     <th class="table-cervejas-col-origem">Origem</th>
