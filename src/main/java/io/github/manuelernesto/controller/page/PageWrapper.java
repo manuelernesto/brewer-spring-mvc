@@ -17,7 +17,10 @@ public class PageWrapper<T> {
     public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest) {
         super();
         this.page = page;
-        this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);
+        String httpUrl = httpServletRequest.getRequestURL().append(
+                httpServletRequest.getQueryString() != null ? "?" + httpServletRequest.getQueryString() : ""
+        ).toString().replaceAll("\\+", "%20");
+        this.uriBuilder = UriComponentsBuilder.fromHttpUrl(httpUrl);
     }
 
     public List<T> getContent() {
@@ -89,6 +92,32 @@ public class PageWrapper<T> {
         return page.getSort().getOrderFor(field) != null ? true : false;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
