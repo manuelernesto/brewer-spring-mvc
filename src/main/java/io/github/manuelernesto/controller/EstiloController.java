@@ -1,25 +1,23 @@
 package io.github.manuelernesto.controller;
 
-import io.github.manuelernesto.Model.Cerveja;
 import io.github.manuelernesto.Model.Estilo;
-import io.github.manuelernesto.Model.Origem;
-import io.github.manuelernesto.Model.Sabor;
+import io.github.manuelernesto.controller.page.PageWrapper;
 import io.github.manuelernesto.repository.Estilos;
-import io.github.manuelernesto.service.CadastroCervejaService;
+import io.github.manuelernesto.repository.filter.EstiloFilter;
 import io.github.manuelernesto.service.CadastroEstiloService;
 import io.github.manuelernesto.service.exception.NomeJaCadastradoException;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -27,9 +25,11 @@ import javax.validation.Valid;
 public class EstiloController {
 
     private final CadastroEstiloService service;
+    private final Estilos estilos;
 
-    public EstiloController(CadastroEstiloService service) {
+    public EstiloController(CadastroEstiloService service, Estilos estilos) {
         this.service = service;
+        this.estilos = estilos;
     }
 
     @RequestMapping("/novo")
@@ -63,6 +63,23 @@ public class EstiloController {
         estilo = service.salvar(estilo);
 
         return ResponseEntity.ok(estilo);
+    }
+
+    @GetMapping
+    public ModelAndView pesquisar(
+            EstiloFilter estiloFilter,
+            BindingResult result,
+            @PageableDefault(size = 2) Pageable pageable,
+            HttpServletRequest httpServletRequest
+    ) {
+        ModelAndView mv = new ModelAndView("estilo/PesquisaEstilos");
+
+        PageWrapper<Estilo> pageWrapper = new PageWrapper<>(
+                estilos.filtrar(estiloFilter, pageable),
+                httpServletRequest);
+
+        mv.addObject("page", pageWrapper);
+        return mv;
     }
 
 }
