@@ -23,7 +23,7 @@ Brewer.MaskPhoneNumber = (function () {
 
     MaskPhoneNumber.prototype.enable = function () {
         let maskBehavior = function (val) {
-                return val.replace(/\D/g, '').length === 11 ? '(000) 000-000-000' : '(000) 0000-00009';
+                return val.replace(/\D/g, '').length === 12 ? '(000) 000-000-000' : '000-000-000';
             },
             options = {
                 onKeyPress: function (val, e, field, options) {
