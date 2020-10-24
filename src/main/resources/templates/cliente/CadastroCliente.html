@@ -2,7 +2,7 @@
 <html lang="pt"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="'layout/LayoutPadrao'">
+      layout:decorate="layout/LayoutPadrao">
 <head>
     <title>Brewer | Cadastro de cliente</title>
 </head>
@@ -46,18 +46,23 @@
                     <label for="tipoPessoa">Tipo pessoa</label>
                     <div id="tipoPessoa">
                         <div class="radio-inline">
-                            <input type="radio" id="fisica" name=tipoPessoa"">
-                            <label for="fisica">Física</label>
+                            <input type="radio" id="id_FISICA" name="tipoPessoa"
+                            class="js-radio-tipo-pessoa"
+                                   data-document="CPF" data-mascara="000.000.000-00">
+                            <label for="id_FISICA" class="control-label">Física</label>
                         </div>
                         <div class="radio-inline">
-                            <input type="radio" id="juridica" name=tipoPessoa"">
-                            <label for="juridica">Juridica</label>
+                            <input type="radio" id="id_JURIDICA" name="tipoPessoa"
+                                   class="js-radio-tipo-pessoa"
+                                   data-document="CNPJ" data-mascara="00.000.000/0000-00">
+                            <label for="id_JURIDICA" class="control-label">Juridica</label>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-8 form-group">
-                    <label for="cpf">CPF/CNPJ</label>
-                    <input id="cpf" type="text" class="form-control"/>
+                    <label for="cpfOuCnpj">CPF/CNPJ</label>
+                    <input id="cpfOuCnpj" type="text" class="form-control"
+                    disabled/>
                 </div>
             </div>
 
@@ -120,6 +125,10 @@
     </div>
 
 </section>
+
+<th:block layout:fragment="javascript-extra">
+    <script th:src="@{/javascripts/cliente-mascara-cpf-cnpj.js}"></script>
+</th:block>
 
 </body>
 
