@@ -19,6 +19,7 @@ Brewer.MaskCpfCnpj = (function () {
 
         this.labelTipoPessoa.text(documento);
         this.inputTipoPessoa.removeAttr('disabled');
+        this.inputTipoPessoa.val('');
         this.inputTipoPessoa.mask(mascara);
     }
 
